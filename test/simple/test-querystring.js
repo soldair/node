@@ -111,6 +111,7 @@ assert.strictEqual('918854443121279438895193',
 
 // test that the canonical qs is parsed properly.
 qsTestCases.forEach(function(testCase) {
+  
   assert.deepEqual(testCase[2], qs.parse(testCase[0]));
 });
 
