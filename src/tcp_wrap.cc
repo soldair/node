@@ -57,6 +57,14 @@ typedef class ReqWrap<uv_connect_t> ConnectWrap;
 Local<Object> AddressToJS(const sockaddr* addr);
 
 
+
+Handle<Value> TCPWrap::Hello(const Arguments& args) {
+
+  HandleScope scope(node_isolate);
+
+  return scope.Close(String::New("world"));
+}
+
 Local<Object> TCPWrap::Instantiate() {
   // If this assert fire then process.binding('tcp_wrap') hasn't been
   // called yet.
@@ -88,6 +96,9 @@ void TCPWrap::Initialize(Handle<Object> target) {
                                      Handle<Value>(),
                                      v8::DEFAULT,
                                      attributes);
+
+
+  NODE_SET_METHOD(target, "hello", Hello);
 
   NODE_SET_PROTOTYPE_METHOD(t, "close", HandleWrap::Close);
 
